@@ -9,6 +9,10 @@ class unitest(unittest.TestCase):
         inputStr = "abcabcbb"
         ans = 3
         self.assertEqual(Solution().lengthOfLongestSubstring(inputStr),ans);
+    def testRepeatEnd(self):
+        inputStr = "cdd"
+        ans = 2
+        self.assertEqual(Solution().lengthOfLongestSubstring(inputStr),ans);
 
 class Solution():
     def lengthOfLongestSubstring(self, s):
@@ -20,11 +24,11 @@ class Solution():
         index = 0
         for item in s:
             if item in dic:
+                ans = max(val,ans)
                 for dicitem in dict(dic):
                     if dic[dicitem] < dic[item]:
                         val -= 1
                         del dic[dicitem]
-                ans = max(val,ans)
             else:
                 val += 1
             dic[item] = index
