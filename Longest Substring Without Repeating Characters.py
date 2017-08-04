@@ -21,8 +21,7 @@ class Solution():
         ans = 0
         val = 0
         dic = {}
-        index = 0
-        for item in s:
+        for index,item in enumerate(s):
             if item in dic:
                 ans = max(val,ans)
                 for dicitem in dict(dic):
@@ -32,7 +31,6 @@ class Solution():
             else:
                 val += 1
             dic[item] = index
-            index +=1
         return max(val,ans)
 
 if __name__ == '__main__':
