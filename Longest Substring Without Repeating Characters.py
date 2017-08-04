@@ -5,11 +5,31 @@ class unitest(unittest.TestCase):
         inputStr = ""
         ans = 0
         self.assertEqual(Solution().lengthOfLongestSubstring(inputStr),ans);
+    def testFirst(self):
+        inputStr = "abcabcbb"
+        ans = 3
+        self.assertEqual(Solution().lengthOfLongestSubstring(inputStr),ans);
 
 class Solution():
     def lengthOfLongestSubstring(self, s):
         if(s == ""):
             return 0
+        ans = 0
+        val = 0
+        dic = {}
+        index = 0
+        for item in s:
+            if item in dic:
+                for dicitem in dict(dic):
+                    if dic[dicitem] < dic[item]:
+                        val -= 1
+                        del dic[dicitem]
+                ans = max(val,ans)
+            else:
+                val += 1
+            dic[item] = index
+            index +=1
+        return max(val,ans)
 
 if __name__ == '__main__':
     unittest.main()
