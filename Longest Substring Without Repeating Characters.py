@@ -16,22 +16,15 @@ class unitest(unittest.TestCase):
 
 class Solution():
     def lengthOfLongestSubstring(self, s):
-        if(s == ""):
-            return 0
-        ans = 0
-        val = 0
+        ans = start = 0
         dic = {}
         for index,item in enumerate(s):
-            if item in dic:
-                ans = max(val,ans)
-                for dicitem in dict(dic):
-                    if dic[dicitem] < dic[item]:
-                        val -= 1
-                        del dic[dicitem]
+            if item in dic and start <= dic[item]:
+                start = dic[item] + 1
             else:
-                val += 1
+                ans = max(ans,index - start + 1)
             dic[item] = index
-        return max(val,ans)
+        return ans
 
 if __name__ == '__main__':
     unittest.main()
